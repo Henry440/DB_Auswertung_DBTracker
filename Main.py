@@ -1,7 +1,11 @@
-
+import time
 from db_handler import db_handler
 
+ts_start = time.time()
 db = db_handler()
+ts_end = time.time()
+
+print(f"Database Inizialised in {round(ts_end - ts_start)} Sekunden")
 
 def getDelay(datas):
     min = 0
