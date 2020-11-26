@@ -5,15 +5,23 @@ class datahandler():
     def __init__(self, db):
         assert isinstance(db, db_handler)
         self.db = db
+        self.entryLen = self.db.entryLen
 
     def _execute(self, cmd):
-        return self.db.execute(cmd)
+        ret = self.db.execute(cmd)
+        return self._toArray(ret)
 
     def _buildRequest(self, request):
         ret = ""
         for i in range(len(request) -1):
             ret = ret + request[i] + ", "
         ret = ret + request[-1] + ""
+        return ret
+
+    def _toArray(self, data):
+        ret = []
+        for i in data:
+            ret.append(i)
         return ret
 
     def get(self, request, table):
