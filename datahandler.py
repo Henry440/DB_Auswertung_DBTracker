@@ -30,14 +30,23 @@ class datahandler():
     def get(self, request, table):
         #SELECT request FROM table
         cmd = f"SELECT {self._buildRequest(request)} FROM {table}"
-        return self._execute(cmd, len(request))
+        if(len(request) == 1 and request[0] == "*"):
+            return self._execute(cmd, 2)
+        else:
+            return self._execute(cmd, len(request))
 
     def get_ignore(self, request, table, filter, value):
         #SELECT request FROM table WHERE filter != value
         cmd = f"SELECT {self._buildRequest(request)} FROM {table} WHERE {filter} != '{value}'"
-        return self._execute(cmd, len(request))
+        if(len(request) == 1 and request[0] == "*"):
+            return self._execute(cmd, 2)
+        else:
+            return self._execute(cmd, len(request))
 
     def get_filter(self, request, table, filter, value):
         #SELECT request FROM table WHERE filter = value
         cmd = f"SELECT {self._buildRequest(request)} FROM {table} WHERE {filter} == '{value}'"
-        return self._execute(cmd, len(request))
+        if(len(request) == 1 and request[0] == "*"):
+            return self._execute(cmd, 2)
+        else:
+            return self._execute(cmd, len(request))
