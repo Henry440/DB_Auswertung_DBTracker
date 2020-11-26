@@ -23,8 +23,10 @@ class datahandler():
 
     def get_ignore(self, request, table, filter, value):
         #SELECT request FROM table WHERE filter != value
-        pass
+        cmd = f"SELECT {self._buildRequest(request)} FROM {table} WHERE {filter} != '{value}''"
+        return self._execute(cmd)
 
     def get_filter(self, request, table, filter, value):
         #SELECT request FROM table WHERE filter = value
-        pass
+        cmd = f"SELECT {self._buildRequest(request)} FROM {table} WHERE {filter} == '{value}''"
+        return self._execute(cmd)
