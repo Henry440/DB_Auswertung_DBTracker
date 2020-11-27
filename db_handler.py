@@ -36,7 +36,19 @@ class db_handler():
             ids.append(id)
         
         exist = []
+        i = 0
+        steps = 5
+        printed = False
         for pack in ids:
+            percent = round(100 * i / len(ids))
+            if(percent % steps == 0):
+                if(printed != True):
+                    print(f"RUN {percent} % Abgeschlossen")
+                    printed = True
+            elif(percent % steps != 0):
+                printed = False
+
+
             id = pack[0]
             rawId = pack[1]
             if(rawId in exist):
@@ -55,6 +67,7 @@ class db_handler():
                         self._delete_entry(gg)
             else:
                 exist.append(rawId)
+            i += 1
 
 
     def get_all_datas(self):
