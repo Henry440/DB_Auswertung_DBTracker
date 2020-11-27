@@ -7,6 +7,8 @@ class datahandler():
         self.db = db
         self.entryLen = self.db.entryLen
 
+
+    #Internal Operrations
     def _execute(self, cmd, lenArgs):
         ret = self.db.execute(cmd)
         return self._toArray(ret, lenArgs)
@@ -27,6 +29,28 @@ class datahandler():
                 ret.append(i)
         return ret
 
+    #External Operations
+    def filter_array(self, data, position, value):
+        ret = []
+        for i in data:
+            if(i[position] == value):
+                ret.append(i)
+        return ret
+
+    def count_value(self, data, position, value):
+        filtertData = self.filter_array(data, position, value)
+        return (len(filtertData))
+
+    def filter_array_gt(self, data, position, value):
+        assert value == int()
+        ret = []
+        for i in data:
+            score = int(i[position])
+            if(score > value):
+                ret.append(i)
+        return(ret)
+
+    #Database Operations
     def get(self, request, table):
         #SELECT request FROM table
         cmd = f"SELECT {self._buildRequest(request)} FROM {table}"
