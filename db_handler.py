@@ -39,12 +39,14 @@ class db_handler():
         i = 0
         steps = 5
         printed = False
+        delete_in_progress = False
         for pack in ids:
             percent = round(100 * i / len(ids))
             if(percent % steps == 0):
                 if(printed != True):
-                    print(f"RUN {percent} % Abgeschlossen")
-                    printed = True
+                    if(delete_in_progress):
+                        print(f"RUN {percent} % Abgeschlossen")
+                        printed = True
             elif(percent % steps != 0):
                 printed = False
 
@@ -65,6 +67,7 @@ class db_handler():
                 for gg in d2:
                     if(gg != max):
                         self._delete_entry(gg)
+                        delete_in_progress = True
             else:
                 exist.append(rawId)
             i += 1
