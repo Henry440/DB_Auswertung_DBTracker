@@ -13,7 +13,7 @@ def init():
     print(f"{data.entryLen} Einträge geladen")
     return data
 
-if __name__ == "__main___":
+if __name__ == "__main__":
     data = init()
 
     delayA = data.get_ignore(["delayA"], TABLE, "delayA", "NA")
